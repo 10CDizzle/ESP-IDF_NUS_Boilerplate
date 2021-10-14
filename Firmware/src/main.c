@@ -33,16 +33,16 @@ static void gatts_profile_a_event_handler_tx(esp_gatts_cb_event_t event, esp_gat
 #define GATTS_DESCR_UUID_TEST_B 0x2222
 #define GATTS_NUM_HANDLE_TEST_B 4
 
-#define TEST_DEVICE_NAME "SomeBLETest"
+#define TEST_DEVICE_NAME "NUS_Boilerplate"
 #define TEST_MANUFACTURER_DATA_LEN 17
 
 #define GATTS_DEMO_CHAR_VAL_LEN_MAX 0x40
 
 #define PREPARE_BUF_MAX_SIZE 1024
 
+bool EchoBLE = false;
 static uint8_t char1_str[] = {0x11, 0x22, 0x33};
 static esp_gatt_char_prop_t a_property = 0;
-static esp_gatt_char_prop_t b_property = 0;
 static uint8_t UART_UUID[] = {0x9E, 0xCA, 0xDC, 0x24, 0x0E, 0xE5, 0xA9, 0xE0, 0x93, 0xF3, 0xA3, 0xB5, 0x01, 0x00, 0x40, 0x6E};
 static uint8_t RX_UUID[] = {0x9E, 0xCA, 0xDC, 0x24, 0x0E, 0xE5, 0xA9, 0xE0, 0x93, 0xF3, 0xA3, 0xB5, 0x02, 0x00, 0x40, 0x6E};
 static uint8_t TX_UUID[] = {0x9E, 0xCA, 0xDC, 0x24, 0x0E, 0xE5, 0xA9, 0xE0, 0x93, 0xF3, 0xA3, 0xB5, 0x03, 0x00, 0x40, 0x6E};
@@ -199,7 +199,6 @@ typedef struct
 } prepare_type_env_t;
 
 static prepare_type_env_t a_prepare_write_env;
-static prepare_type_env_t b_prepare_write_env;
 
 void example_write_event_env(esp_gatt_if_t gatts_if, prepare_type_env_t *prepare_write_env, esp_ble_gatts_cb_param_t *param);
 void example_exec_write_event_env(prepare_type_env_t *prepare_write_env, esp_ble_gatts_cb_param_t *param);
@@ -1034,8 +1033,8 @@ void app_main()
     // xTaskCreate(countdownAndRestart, "Shutdown", STACK_SIZE, &ucParameterToPass, tskIDLE_PRIORITY, &xHandle);
     // configASSERT( xHandle );
 
-    static uint8_t countParameterToPass;
-    TaskHandle_t countHandle = NULL;
+    // static uint8_t countParameterToPass;
+    // TaskHandle_t countHandle = NULL;
     // // // Create the task, storing the handle.  Note that the passed parameter ucParameterToPass
     // // // must exist for the lifetime of the task, so in this case is declared static.  If it was just an
     // // // an automatic stack variable it might no longer exist, or at least have been corrupted, by the time
@@ -1044,6 +1043,5 @@ void app_main()
     // printf("Counting running...\n");
     // xTaskCreate(justcount, "Counting", 2048, &countParameterToPass, tskIDLE_PRIORITY, &countHandle);
     // configASSERT(countHandle);
-
-    return 0;
+    
 }
